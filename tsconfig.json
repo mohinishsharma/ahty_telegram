@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "baseUrl": ".",
+        "rootDir": "src",
+        "types": [
+            "node",
+        ],
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "lib": [
+            "ESNext"
+        ]
+    },
+    "include": ["src", "env-shims.d.ts"],
+    "exclude": ["node_modules", "dist"]
+}
