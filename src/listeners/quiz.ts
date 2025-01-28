@@ -23,7 +23,7 @@ export function quizListener(bot: Telegraf) {
         
         const questionMessage = await ctx.reply(message, { parse_mode: "HTML" });
         // reply with the quiz question
-        await ctx.replyWithQuiz(`#Q${questionId}`, response.choices, { correct_option_id: response.answer_index, reply_parameters: { message_id: questionMessage.message_id } });
+        await ctx.replyWithQuiz(`#Q${questionId}`, response.choices, { correct_option_id: response.answer_index, reply_parameters: { message_id: questionMessage.message_id }, is_anonymous: false });
         // reply with the explanation in spoiler
         await ctx.reply(`#Q${questionId} Explanation\n\n<span class="tg-spoiler">${response.explanation}</span>`, { parse_mode: "HTML" });
 
