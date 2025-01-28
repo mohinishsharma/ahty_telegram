@@ -53,7 +53,11 @@ Used to greet someone, especially in a formal way.
     return response.choices[0].message.content || "";
 }
 
-
+/**
+ * Solve a GRE question from OpenAI
+ * @param prompt Question to solve
+ * @returns Response from OpenAI
+ */
 export async function solveGREQuestion(prompt: string): Promise<string> {
     const response = await openai.chat.completions.create({
         messages: [
@@ -88,7 +92,11 @@ Explanation text goes here. with reasoning and steps, Do appropriate styling usi
     return response.choices[0].message.content || "";
 }
 
-
+/**
+ * Get a GRE quiz question from OpenAI
+ * @param type Type of question to get
+ * @returns GRE question
+ */
 export async function getGREQuiz(type: string): Promise<Question | null> {
     const response = await openai.chat.completions.create({
         messages: [
