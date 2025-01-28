@@ -89,13 +89,13 @@ Explanation text goes here. with reasoning and steps, Do appropriate styling usi
 }
 
 
-export async function getGREQuiz(): Promise<Question | null> {
+export async function getGREQuiz(type: string): Promise<Question | null> {
     const response = await openai.chat.completions.create({
         messages: [
             {
                 role: "system",
-                content: `You are and assistant that generates a medium or hard GRE question (quantitative, logical reasoning, FIB, etc.) with multiple choices and provide the correct answer. Do not deviate from the GRE question.
-                Difficulty level should be medium to hard. Do not provide easy questions at all. Generate a question that is challenging and should not be easily solvable or arithmetically solvable.
+                content: `You are and assistant that generate a hard or medium GRE question which is very similar to actual GRE questions (${type}) with multiple choices and provide the correct answer.
+                Generate a question that is challenging and should NOT be easily arithmetically solvable and should require logical reasoning or critical thinking.
                 Do not include any unnecessary information and keep the response concise.
                 Following are the only html elements that are allowed: <b>, <i>, <s>, <del>, <u>.
                 Strictly utilise the above html elements to format the text as required. Do not use any other html elements and Do not use any css or Markdown or MathML or Escape characters.

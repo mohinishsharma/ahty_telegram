@@ -8,10 +8,13 @@ import { Telegraf } from "telegraf";
  */
 export function quizListener(bot: Telegraf) {
     bot.command("quiz", async (ctx) => {
+        const [, ...rest] = ctx.message.text.split(" ");
+        const args = rest.join(" ");
+        
         // reply with typing
         ctx.deleteMessage();
         ctx.sendChatAction("typing");
-        const response = await getGREQuiz();
+        const response = await getGREQuiz(args);
         if (!response) {
             return;
         }
