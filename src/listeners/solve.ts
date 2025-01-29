@@ -17,7 +17,7 @@ export function solveListener(bot: Telegraf) {
         if (!replyToMessage) {
             return;
         }
-        ctx.deleteMessage();
+        ctx.deleteMessage().catch(() => {});
         ctx.sendChatAction("typing");
         // @ts-expect-error text is not defined in type
         const text = replyToMessage.text;

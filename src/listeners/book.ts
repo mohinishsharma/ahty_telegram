@@ -17,6 +17,7 @@ export async function bookListener(bot: Telegraf) {
         if (!query) {
             return;
         }
+        ctx.deleteMessage().catch(() => {});
         // reply with typing
         ctx.sendChatAction("typing");
         // const processingMessage = await ctx.reply("Searching for books...", { reply_markup: { remove_keyboard: true } });
@@ -60,7 +61,7 @@ export async function bookListener(bot: Telegraf) {
         const [action, ...rest] = data.split(" ");
         const commandData = rest.join(" ");
         if (action === "discard") {
-            ctx.deleteMessage();
+            ctx.deleteMessage().catch(() => {});
             return;
         } else if (action === "dwn") {
             if (!commandData) {

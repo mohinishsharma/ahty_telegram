@@ -16,7 +16,7 @@ export function defineListener(bot: Telegraf) {
         if (!word) {
             return;
         }
-        ctx.deleteMessage();
+        ctx.deleteMessage().catch(() => {});
         // reply with typing
         ctx.sendChatAction("typing");
         const response = await defineWord(word);

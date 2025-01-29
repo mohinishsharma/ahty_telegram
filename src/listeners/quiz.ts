@@ -12,7 +12,11 @@ export function quizListener(bot: Telegraf) {
         const args = rest.join(" ");
         
         // reply with typing
-        ctx.deleteMessage();
+        ctx.deleteMessage().catch(() => {});
+        if (!args) {
+            return;
+        }
+
         ctx.sendChatAction("typing");
         const response = await getGREQuiz(args);
         if (!response) {
