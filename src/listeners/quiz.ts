@@ -23,6 +23,9 @@ export function quizListener(bot: Telegraf) {
             return;
         }
         const questionId = Math.abs(ctx.message.message_id);
+        if (response.passage) {
+            await ctx.reply(`#Q${questionId}\nPassage:\n\n${response.passage}`, { parse_mode: "HTML" });
+        }
         const message = `#Q${questionId}\n[${response.difficulty}]\n\n${response.question}`;
         
         const questionMessage = await ctx.reply(message, { parse_mode: "HTML" });

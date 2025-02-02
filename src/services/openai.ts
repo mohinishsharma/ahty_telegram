@@ -109,6 +109,7 @@ export async function getGREQuiz(type: string): Promise<Question | null> {
                 Strictly utilise the above html elements to format the text as required. Do not use any other html elements and Do not use any css or Markdown or MathML or Escape characters.
                 Strictly use the following JSON format and structure. Do not deviate from the format.:
 {
+    "passage": "The passage goes here. (Optional field. Include only if the question is based on a passage.)",
     "question": "What is the capital of France?",
     "choices": ["London", "Paris", "Berlin", "Madrid"],
     "answer": "Paris",
@@ -130,6 +131,7 @@ export async function getGREQuiz(type: string): Promise<Question | null> {
 }
 
 export interface Question {
+    passage?: string;
     question: string;
     choices: string[];
     answer: string;
