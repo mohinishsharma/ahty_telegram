@@ -1,6 +1,8 @@
 import { getConfigValue } from "@/utils/config";
 import { debug } from "@/utils/debug";
 import OpenAI from "openai";
+import { Blob } from "node:buffer";
+import { getBase64FromBlob } from "@/utils/file";
 
 
 const OPENAI_API_KEY = getConfigValue("openaiApiKey");
@@ -56,36 +58,46 @@ Used to greet someone, especially in a formal way.
 /**
  * Solve a GRE question from OpenAI
  * @param prompt Question to solve
+ * @param image Image of the question
  * @returns Response from OpenAI
  */
-export async function solveGREQuestion(prompt: string): Promise<string> {
+export async function solveGREQuestion(prompt: string, image?: Blob): Promise<string> {
+    const content: OpenAI.Chat.Completions.ChatCompletionContentPart[] = [];
+    content.push({ type: "text", text: prompt });
+    if (image) {
+        const base64 = await getBase64FromBlob(image);
+        content.push({ type: "image_url", image_url: { detail: "low", url: base64 } });
+    }
+    
+
     const response = await openai.chat.completions.create({
         messages: [
             {
                 role: "system",
-                content: `Understand the question and nuances and solve the GRE question carefully and correctly, and explain the reasoning behind the answer.
-                If provided prompt does not resemble a question, do not presume or create question and return message stating that the prompt is not a question.
+                content: `Understand the question and nuances and solve the GRE question. Think carefully and correctly always solve question to produce correct answer, and explain the reasoning behind the answer.
+                Break down the question or image into parts and think about the possible solutions. Do not include unnecessary escape characters like \\(, \\) or \\".
+                Analyse querstion carefully, answer will always be present in the option if given. only produce final answer after careful consideration.
+                If unsure about the answer, try to provide the best possible answer based on the information provided in the question while explicitly stating that the answer is not certain.
+                If provided prompt or image attached does not resemble a question, do not presume or create question and return message stating that the prompt is not a question.
                 Do not include any unnecessary information and keep the response concise.
-                Following are the only html elements that are allowed: <b>, <i>, <s>, <del>, <u>.
-                Strictly utilise the above html elements to format the text as required. Do not use any other html elements and Do not use any css or Markdown or MathML or Escape characters.
+                Following are the only HTML elements that are allowed: <b>, <i>, <s>, <del>, <u>.
+                Strictly utilise the above HTML elements to format the text as required. DO NOT use any other HTML elements that are not mentioned in allowed list and Do not use any css or Markdown or MathML or LaTex of any kind.
+                If there need be any symbols or special characters, use the appropriate ascii characters representing them. Do use MathML or LaTex. Do not do unnecessary formatting and escaping of leagl characters in the HTML.
                 Strictly use the following format and structure. Do not deviate from the format.:
-{{emoji}} <b>Question</b>
-Who is the president of the United States?
-A. John Doe
-B. Jane Doe
-C. Joe Biden
-D. Donald Trump
+<b>Given</b>
+Information goes here.
+
+<b>Explanation</b>
+Explanation text goes here. with reasoning and steps, Do appropriate styling using allowed html elements only.
 
 <b>Answer</b>
 C. Joe Biden
-
-<b>Explanation</b>
-Explanation text goes here. with reasoning and steps, Do appropriate styling using allowed html elements only.`,
+`,
             },
             {
                 role: "user",
-                content: prompt,
-            }
+                content
+            },
         ],
         model: 'gpt-4o-mini-2024-07-18'
     });
