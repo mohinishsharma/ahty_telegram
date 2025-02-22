@@ -27,5 +27,25 @@ declare namespace NodeJS {
      * Google Books API key
      */
     GOOGLE_BOOKS_API_KEY: string;
+    /**
+     * MySQL database host
+     */
+    MYSQL_HOST: string;
+    /**
+     * MySQL database port
+     */
+    MYSQL_PORT: string;
+    /**
+     * MySQL database name
+     */
+    MYSQL_DATABASE: string;
+    /**
+     * MySQL database username
+     */
+    MYSQL_USER: string;
+    /**
+     * MySQL database password
+     */
+    MYSQL_PASSWORD: string;
   }
 }

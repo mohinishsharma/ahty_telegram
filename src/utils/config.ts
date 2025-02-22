@@ -16,6 +16,13 @@ export interface Config {
     debug: boolean;
     openaiApiKey: string;
     googleBooksApiKey: string;
+    mysql: {
+        host: string;
+        port: number;
+        database: string;
+        user: string;
+        password: string;
+    };
 }
 
 /**
@@ -48,6 +55,13 @@ function loadConfig(): void {
     tempConfig.debug = process.env.APP_DEBUG === 'true';
     tempConfig.openaiApiKey = process.env.OPENAI_API_KEY;
     tempConfig.googleBooksApiKey = process.env.GOOGLE_BOOKS_API_KEY;
+    tempConfig.mysql = {
+        host: process.env.MYSQL_HOST,
+        port: parseInt(process.env.MYSQL_PORT),
+        database: process.env.MYSQL_DATABASE,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD
+    };
     if (!isConfigValid(tempConfig)) {
         throw new Error('Invalid config');
     }
