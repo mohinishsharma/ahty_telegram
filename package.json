@@ -14,7 +14,7 @@
   },
   "keywords": [],
   "author": "Mohinish Sharma <sharmamohinish67@gmail.com>",
-  "license": "ISC",
+  "license": "AGPL-3.0-only",
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@types/mime-types": "^2.1.4",
