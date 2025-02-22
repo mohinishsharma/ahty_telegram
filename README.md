@@ -20,20 +20,22 @@ AHTY Telegram Bot is a TypeScript-based bot that integrates with OpenAI, Google 
 
 ### Installation
 
-1. Clone the repository:
+1. Fork the repository.
+
+2. Clone the repository:
 
     ```sh
-    git clone https://github.com/yourusername/ahty_telegram_ts.git
-    cd ahty_telegram_ts
+    git clone https://github.com/yourusername/ahty_telegram.git
+    cd ahty_telegram
     ```
 
-2. Install dependencies:
+3. Install dependencies:
 
     ```sh
     npm install
     ```
 
-3. Create a `.env` file in the root directory and add your API keys:
+4. Create a `.env` file in the root directory (Use `.env.sample` as template) and add your API keys:
 
     ```env
     openaiApiKey=your_openai_api_key
