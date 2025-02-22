@@ -8,6 +8,8 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "isolatedModules": true,
         "noEmit": true,
         "baseUrl": ".",
