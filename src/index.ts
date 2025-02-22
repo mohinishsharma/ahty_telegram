@@ -4,9 +4,11 @@ import { getConfigValue } from "@/utils/config";
 import { TelegramBot } from "@/bot";
 import { registerListeners } from "@/listeners/index";
 
-
+/**
+ * Main application function  
+ * which starts the bot and registers all listeners
+ */
 function application() {
-    // Your application code
     const appName = getConfigValue("appName");
     const env = getConfigValue("env");
     const token = getConfigValue("telegramBotToken");
@@ -25,7 +27,7 @@ function application() {
     });
 }
 
-application();
+application(); // Start the application
 
 
 

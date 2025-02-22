@@ -4,7 +4,9 @@ import OpenAI from "openai";
 import { Blob } from "node:buffer";
 import { getBase64FromBlob } from "@/utils/file";
 
-
+/**
+ * OpenAI API key
+ */
 const OPENAI_API_KEY = getConfigValue("openaiApiKey");
 const openai = new OpenAI({
     apiKey: OPENAI_API_KEY,
@@ -142,6 +144,9 @@ export async function getGREQuiz(type: string): Promise<Question | null> {
     return null;
 }
 
+/**
+ * GRE question type returned from OpenAI
+ */
 export interface Question {
     passage?: string;
     question: string;

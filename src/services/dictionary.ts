@@ -1,5 +1,8 @@
 import axios from "axios";
 
+/**
+ * Axios client for interacting with the Dictionary API.
+ */
 const dictionaryClient = axios.create({
     baseURL: "https://api.dictionaryapi.dev/api/v2/entries/en",
 });
@@ -41,6 +44,11 @@ export async function defineWord(word: string): Promise<string> {
     return message;
 }
 
+/**
+ * Get the phonetic audio buffer for a given word.
+ * @param word Word to search in the dictionary
+ * @returns Audio buffer of the phonetic pronunciation or null if not available
+ */
 export async function getPhoneticAudioBuffer(word: string): Promise<Buffer | null> {
     const response = await dictionaryClient.get(`/${word}`);
     const data = response.data as WordData[];

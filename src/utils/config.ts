@@ -1,8 +1,14 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+/**
+ * Environment type
+ */
 export type Environment = 'uat' | 'development' | 'production' | 'local';
 
+/**
+ * Config object
+ */
 export interface Config {
     appName: string;
     env: Environment;
@@ -12,6 +18,9 @@ export interface Config {
     googleBooksApiKey: string;
 }
 
+/**
+ * Partial config object to allow loading in parts
+ */
 const config: Partial<Config> = {}; // Partial<Config> is used to allow the config to be loaded in parts
 
 /**
