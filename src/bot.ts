@@ -55,6 +55,14 @@ export class TelegramBot {
     }
 
     /**
+     * Adds a middleware to the bot
+     * @param middleware - The middleware function to add
+     */
+    addMiddleware(middleware: TelegramBotListener) {
+        middleware(this.bot);
+    }
+
+    /**
      * Starts the bot
      */
     start() {

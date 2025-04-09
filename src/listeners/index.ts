@@ -3,6 +3,7 @@ import { defineListener } from "@/listeners/define";
 import { solveListener } from "./solve";
 import { bookListener } from "./book";
 import { quizListener } from "./quiz";
+import { startListener } from "./start";
 
 
 /**
@@ -15,5 +16,6 @@ export function registerListeners(telegramBot: TelegramBot) {
     telegramBot.addListener(solveListener);
     telegramBot.addListener(bookListener);
     telegramBot.addListener(quizListener);
+    telegramBot.addListener(startListener);
 }
 

@@ -5,6 +5,7 @@ import { getConfigValue } from "@/utils/config";
 import { TelegramBot } from "@/bot";
 import { registerListeners } from "@/listeners/index";
 import dataSource from "./typeorm";
+import { registerMiddlewares } from "./middlewares";
 
 /**
  * Main application function  
@@ -22,6 +23,7 @@ async function application() {
     }
     consola.info(`Database connection: ${dataSource.isInitialized ? pc.green("Connected") : pc.red("Failed")}`);
     const bot = new TelegramBot(token);
+    registerMiddlewares(bot); // Register all middlewares
     registerListeners(bot); // Register all listeners
     bot.start();
     consola.success(`${appName} started`);
